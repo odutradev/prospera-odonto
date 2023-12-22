@@ -1,8 +1,8 @@
 {
-  "name": "registro-stamper",
+  "name": "react-vite-template",
   "version": "1.0.0",
   "type": "module",
-  "description": "React app para registro stamper.",
+  "description": "Template funcional para uso do react junto ao vite e styled-components.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,12 +14,12 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-router-dom": "^6.4.2",
-    "styled-components": "^5.3.6"
+    "react-icons": "^4.12.0",
+    "react-router-dom": "^6.21.1",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^2.0.0",
-    "vite": "^3.1.4"
+    "@vitejs/plugin-react": "^2.2.0",
+    "vite": "^3.2.7"
   }
 }
