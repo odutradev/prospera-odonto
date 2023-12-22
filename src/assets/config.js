@@ -1,3 +1,4 @@
 export default {
-    pageTitle: "react-vite-template"
+    pageTitle: "react-vite-template",
+    baseURL: "" 
 }

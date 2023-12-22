@@ -13,7 +13,8 @@ p, a, h1 {
 }
 body {
   font-family: 'Ubuntu', sans-serif;
-  background-color: #050505;
+  background: ${({theme}) => theme.colors.background};
+
 }
 ::-webkit-scrollbar-track {
     background-color: #363636;
