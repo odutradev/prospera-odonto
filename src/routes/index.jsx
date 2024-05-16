@@ -1,10 +1,14 @@
-import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
+import Dashboard from "../pages/dashboard";
 import SignIn from "../pages/signin";
 import SignUp from "../pages/signup";
 import Error from "../pages/error";
 
   export const Router = () => {
+
+    const PrivateRoute = () => localStorage.getItem("token") != null ? <Outlet  /> : <Navigate to="/signin" />;
+    
     return(
       <BrowserRouter>
         <Routes>
@@ -14,7 +18,9 @@ import Error from "../pages/error";
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/404" element={<Error />}/>
 
-          
+          <Route exact element={<PrivateRoute  />}>
+            <Route path="/dashboard" element={<Dashboard />}/>
+          </Route>
 
         </Routes>
       </BrowserRouter>
