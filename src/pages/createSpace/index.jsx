@@ -1,28 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
 import Layout from '../../components/layout';
 import spaceAction from '../../actions/space';
-
+import userAction from '../../actions/user';
+import { toast } from 'react-toastify';
 const CreateSpace = () => {
-  const [space, setSpace] = useState({
-    name: "",
-    author: "",
-    description: "",
-    date: new Date().toISOString(),
-    config: {
-      tax: 0,
-      cardChange: 0,
-      materialTime: 0,
-      valueTime: 0,
-      dentistValue: 0,
-      annualCapital: 0,
-    }
-  });
+  const [space, setSpace] = useState({ name: "", author: "", description: ""});
 
   const handleCreate = async () => {
-    await spaceAction.create(space);
-    window.location.href = "/dashboard/spaces";
+    const send = async () => {
+        var response = await spaceAction.create(space);
+        if (response.error) throw error;
+        return setTimeout(() => { window.location.href = "/dashboard/spaces" }, 500);
+      }
+      toast.promise(send(), {
+        pending: `Criando espaço`,
+        success: `Espaço criado com sucesso`,
+        error: `Erro ao criar espaço`
+      })
   };
+
+  const getUser = async () => {
+    var response = await userAction.me();
+    setSpace({...space, author: response._id});
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <Layout>
@@ -45,14 +50,6 @@ const CreateSpace = () => {
           label="Nome"
           value={space.name}
           onChange={(e) => setSpace({ ...space, name: e.target.value })}
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
-        <TextField
-          label="Autor"
-          value={space.author}
-          onChange={(e) => setSpace({ ...space, author: e.target.value })}
           variant="outlined"
           fullWidth
           margin="normal"
