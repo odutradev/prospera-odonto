@@ -1,16 +1,21 @@
-import { ThemeProvider } from 'styled-components';
+import {  ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-import Router from './routes';
-import {theme} from './styles/theme'
-import GlobalStyle from './styles/globalStyles'
+import MuiTheme from './styles/theme/mui';
 import config from './assets/config';
+import Router from './routes';
+
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={MuiTheme}>
       <title>{config?.pageTitle}</title>
-      <GlobalStyle />
+      <CssBaseline />
       <Router />
     </ThemeProvider>
   );
