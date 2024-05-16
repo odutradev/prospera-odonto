@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
 import Error from "../pages/error";
-import Main from "../pages/main"
+import SignIn from "../pages/signin"
 
   export const Router = () => {
     return(
@@ -9,7 +9,8 @@ import Main from "../pages/main"
         <Routes>
           <Route path="*" element={<Navigate to="/404" replace/>}/>
           <Route path="/404" element={<Error />}/>
-          <Route path="/" element={<Main />}/>
+          <Route path="/" element={<Navigate to="/signin" replace/>}/>
+          <Route path="/signin" element={<SignIn />}/>
 
         </Routes>
       </BrowserRouter>

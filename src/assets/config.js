@@ -1,4 +1,4 @@
 export default {
-    pageTitle: "Bonfire",
+    pageTitle: "Prospera Odonto",
     baseURL: "" 
 }
