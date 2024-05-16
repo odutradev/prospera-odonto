@@ -1,18 +1,19 @@
+import { toast } from 'react-toastify';
+import * as React from 'react';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import { toast } from 'react-toastify';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import * as React from 'react';
 
 import userAction from '../../actions/user.js';
 
-export default function SignIn() {
+const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -24,7 +25,10 @@ export default function SignIn() {
     if (response?.error) {
       return toast.error(response.error);
     }
-    return toast.success("Login bem sucedido!")
+    toast.success("Login bem-sucedido!");
+    setTimeout(() => { 
+      window.location.href = '/dashboard?reload=true';
+    }, 2500)
   };
 
   return (
@@ -57,7 +61,6 @@ export default function SignIn() {
             <TextField
               margin="normal"
               required
-              password
               fullWidth
               name="password"
               label="Senha"
@@ -86,3 +89,5 @@ export default function SignIn() {
       </Container>
   );
 }
+
+export default SignIn;
