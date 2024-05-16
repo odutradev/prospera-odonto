@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import EventIcon from '@mui/icons-material/Event';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import HistoryIcon from '@mui/icons-material/History';
-import LogoutIcon from '@mui/icons-material/Logout';
 
-function getRandomLetter() {
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  return alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-}
+import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import EventIcon from '@mui/icons-material/Event';
+import MenuIcon from '@mui/icons-material/Menu';
+import Loading from '../loading';
 
 const spaces = ["Espaço 1", "Espaço 2", "Espaço 3"];
 
-function DashboardLayout({ children, user }) {
+function DashboardLayout({ children, user, loading=false }) {
   const [selectedSpace, setSelectedSpace] = useState(spaces[0]);
   const [drawerOpen, setDrawerOpen] = useState(true);
   const location = useLocation();
@@ -113,7 +108,7 @@ function DashboardLayout({ children, user }) {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3, ml: `${drawerOpen ? 240 : 60}px`, transition: 'margin-left 0.3s' }}>
         <Toolbar />
-        {children}
+        { loading != false ? <Loading message={loading!=true && loading}/> : children}     
       </Box>
     </Box>
   );
