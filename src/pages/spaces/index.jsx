@@ -6,12 +6,11 @@ import AddIcon from '@mui/icons-material/Add';
 import spaceAction from '../../actions/space'; 
 import Layout from '../../components/layout';
 
-const Space = () => {
+const Spaces = () => {
   const [spaces, setSpaces] = useState([]);
 
   const getSpaces = async () => {
     var response = await spaceAction.get();
-    console.log(response)
     setSpaces(response)
   };
 
@@ -20,11 +19,11 @@ const Space = () => {
   }, []);
 
   const handleCreateSpace = () => {
-
+    window.location.href = "/dashboard/space/create";
   };
 
   const handleRowClick = (id) => {
-
+    window.location.href = "/dashboard/space/" + id;
   };
 
   return (
@@ -58,4 +57,4 @@ const Space = () => {
   );
 };
 
-export default Space;
+export default Spaces;

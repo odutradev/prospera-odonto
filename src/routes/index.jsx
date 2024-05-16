@@ -7,6 +7,8 @@ import Spaces from "../pages/spaces";
 import SignUp from "../pages/signup";
 import Logout from "../pages/logout";
 import Error from "../pages/error";
+import Space from "../pages/space";
+import CreateSpace from "../pages/createSpace";
 
   export const Router = () => {
 
@@ -23,7 +25,9 @@ import Error from "../pages/error";
           <Route path="/404" element={<Error />}/>
 
           <Route exact element={<PrivateRoute  />}>
+            <Route exact path="/dashboard/space/create" element={<CreateSpace/>}/>
             <Route path="/dashboard/profile" element={<Profile />}/>
+            <Route path="/dashboard/space/:id" element={<Space/>}/>
             <Route path="/dashboard/spaces" element={<Spaces />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
           </Route>
