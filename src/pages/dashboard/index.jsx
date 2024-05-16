@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { Container, Box } from './styles';
+import Layout from "../../components/layout";
+import { Typography } from '@mui/material';
 
 const Dashboard = () => {
 
     return (
-       <>
-       dasgboard
-       </>
+       <Layout>
+              <Typography paragraph>
+          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac tincidunt.
+        </Typography>
+       </Layout>
     )
 }
 
