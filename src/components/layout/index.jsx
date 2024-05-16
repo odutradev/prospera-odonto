@@ -5,6 +5,7 @@ import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Div
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddToPhotos from '@mui/icons-material/AddToPhotos';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LocalOffer from '@mui/icons-material/LocalOffer';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 
@@ -47,6 +48,7 @@ function DashboardLayout({ children, user, loading=false }) {
   const defaultLinks = [
     [<HomeIcon />, 'Visão Geral', '/dashboard'],
     [<AddToPhotos />, 'Espaços', '/dashboard/spaces'],
+    [<LocalOffer />, 'Serviços', '/dashboard/services'],
   ];
 
   const settingsLinks = [

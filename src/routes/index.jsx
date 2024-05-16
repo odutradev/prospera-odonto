@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
+import CreateSpace from "../pages/createSpace";
 import Dashboard from "../pages/dashboard";
+import Services from "../pages/services";
 import Profile from "../pages/profile";
 import SignIn from "../pages/signin";
 import Spaces from "../pages/spaces";
@@ -8,7 +10,6 @@ import SignUp from "../pages/signup";
 import Logout from "../pages/logout";
 import Error from "../pages/error";
 import Space from "../pages/space";
-import CreateSpace from "../pages/createSpace";
 
   export const Router = () => {
 
@@ -29,6 +30,7 @@ import CreateSpace from "../pages/createSpace";
             <Route path="/dashboard/profile" element={<Profile />}/>
             <Route path="/dashboard/space/:id" element={<Space/>}/>
             <Route path="/dashboard/spaces" element={<Spaces />}/>
+            <Route path="/dashboard/services" element={<Services />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
           </Route>
 
