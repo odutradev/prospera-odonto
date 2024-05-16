@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import EventIcon from '@mui/icons-material/Event';
+import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import Loading from '../loading';
 
@@ -24,7 +24,7 @@ function DashboardLayout({ children, user, loading=false }) {
   };
 
   const defaultLinks = [
-    [<EventIcon />, 'Visão Geral', '/dashboard']
+    [<HomeIcon />, 'Visão Geral', '/dashboard']
   ];
 
   const settingsLinks = [

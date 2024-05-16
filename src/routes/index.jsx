@@ -5,6 +5,7 @@ import SignIn from "../pages/signin";
 import SignUp from "../pages/signup";
 import Error from "../pages/error";
 import Logout from "../pages/logout";
+import Profile from "../pages/profile";
 
   export const Router = () => {
 
@@ -22,6 +23,7 @@ import Logout from "../pages/logout";
 
           <Route exact element={<PrivateRoute  />}>
             <Route path="/dashboard" element={<Dashboard />}/>
+            <Route path="/dashboard/profile" element={<Profile />}/>
           </Route>
 
         </Routes>
