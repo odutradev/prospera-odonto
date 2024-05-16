@@ -1,34 +1,40 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import { toast } from 'react-toastify';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import * as React from 'react';
+
+import userAction from '../../actions/user.js';
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    var form = {
       email: data.get('email'),
-      password: data.get('password'),
-    });
+      password: data.get('password')
+    };
+    var response = await userAction.signIn(form);
+    if (response?.error) {
+      return toast.error(response.error);
+    }
+    return toast.success("Login bem sucedido!")
   };
 
   return (
       <Container component="main" maxWidth="xs" sx={{ justifyContent: 'center'}}>
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -37,7 +43,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Bem-vindo de volta!
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -51,6 +57,7 @@ export default function SignIn() {
             <TextField
               margin="normal"
               required
+              password
               fullWidth
               name="password"
               label="Senha"
