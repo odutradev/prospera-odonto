@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
 import Dashboard from "../pages/dashboard";
-import SignIn from "../pages/signin";
-import SignUp from "../pages/signup";
-import Error from "../pages/error";
-import Logout from "../pages/logout";
 import Profile from "../pages/profile";
+import SignIn from "../pages/signin";
+import Spaces from "../pages/spaces";
+import SignUp from "../pages/signup";
+import Logout from "../pages/logout";
+import Error from "../pages/error";
 
   export const Router = () => {
 
@@ -22,8 +23,9 @@ import Profile from "../pages/profile";
           <Route path="/404" element={<Error />}/>
 
           <Route exact element={<PrivateRoute  />}>
-            <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/dashboard/profile" element={<Profile />}/>
+            <Route path="/dashboard/spaces" element={<Spaces />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
           </Route>
 
         </Routes>

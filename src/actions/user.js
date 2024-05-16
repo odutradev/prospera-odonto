@@ -40,7 +40,7 @@ const get = async () => {
 
 const update = async (data) => {
     try {
-        const response = await api.put('/user/update', { data });
+        const response = await api.put('/user/update', data);
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };

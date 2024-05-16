@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AddToPhotos from '@mui/icons-material/AddToPhotos';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,7 +25,8 @@ function DashboardLayout({ children, user, loading=false }) {
   };
 
   const defaultLinks = [
-    [<HomeIcon />, 'Visão Geral', '/dashboard']
+    [<HomeIcon />, 'Visão Geral', '/dashboard'],
+    [<AddToPhotos />, 'Espaços', '/dashboard/spaces'],
   ];
 
   const settingsLinks = [
@@ -106,7 +108,7 @@ function DashboardLayout({ children, user, loading=false }) {
           </div>
         </Stack>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, ml: `${drawerOpen ? 240 : 60}px`, transition: 'margin-left 0.3s' }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3, transition: 'margin-left 0.3s' }}>
         <Toolbar />
         { loading != false ? <Loading message={loading!=true && loading}/> : children}     
       </Box>
