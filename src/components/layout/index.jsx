@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
@@ -7,14 +7,32 @@ import AddToPhotos from '@mui/icons-material/AddToPhotos';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
+
+import spaceAction from '../../actions/space';
 import Loading from '../loading';
 
-const spaces = ["Espaço 1", "Espaço 2", "Espaço 3"];
-
 function DashboardLayout({ children, user, loading=false }) {
-  const [selectedSpace, setSelectedSpace] = useState(spaces[0]);
+  const [selectedSpace, setSelectedSpace] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(true);
+  const [spaces, setSpaces] = useState([]);
   const location = useLocation();
+
+  const getSpaces = async () => {
+    var response = await spaceAction.get();
+    setSpaces(response)
+    var localSpace = localStorage.getItem("space");
+    if (!localSpace) return;
+    var findSpace = response.find(item => item._id == localSpace);
+    if (findSpace){
+      setSelectedSpace(findSpace.name)
+    } else {
+      localStorage.removeItem("space");
+    }
+  };
+
+  useEffect(() => {
+    getSpaces();
+  }, []);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -22,6 +40,8 @@ function DashboardLayout({ children, user, loading=false }) {
 
   const handleSpaceChange = (event) => {
     setSelectedSpace(event.target.value);
+    var findSpace = spaces.find(item => item.name = event.target.value);
+    localStorage.setItem("space", findSpace._id);
   };
 
   const defaultLinks = [
@@ -73,8 +93,8 @@ function DashboardLayout({ children, user, loading=false }) {
                     label="Espaço"
                   >
                     {spaces.map((space) => (
-                      <MenuItem key={space} value={space}>
-                        {space}
+                      <MenuItem key={space.name} value={space.name}>
+                        {space.name}
                       </MenuItem>
                     ))}
                   </Select>
