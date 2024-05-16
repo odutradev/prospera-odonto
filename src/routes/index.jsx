@@ -4,6 +4,7 @@ import Dashboard from "../pages/dashboard";
 import SignIn from "../pages/signin";
 import SignUp from "../pages/signup";
 import Error from "../pages/error";
+import Logout from "../pages/logout";
 
   export const Router = () => {
 
@@ -16,6 +17,7 @@ import Error from "../pages/error";
           <Route path="*" element={<Navigate to="/404" replace/>}/>
           <Route path="/signin" element={<SignIn />}/>
           <Route path="/signup" element={<SignUp />}/>
+          <Route path="/logout" element={<Logout />}/>
           <Route path="/404" element={<Error />}/>
 
           <Route exact element={<PrivateRoute  />}>
