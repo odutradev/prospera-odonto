@@ -31,6 +31,11 @@ const SignIn = () => {
     }, 2500)
   };
 
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null){
+      window.location.href = '/dashboard';
+    }
+  },[])
   return (
       <Container component="main" maxWidth="xs" sx={{ justifyContent: 'center'}}>
         <Box
