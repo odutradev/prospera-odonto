@@ -52,12 +52,12 @@ const Services = () => {
   };
 
   return (
-    <Layout>
+    <Layout updateSpace={getServices}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Taxa (%)"
+              label="Taxa de Imposto (%)"
               name="tax"
               type="number"
               value={config.tax}
@@ -77,7 +77,7 @@ const Services = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Material hora (R$)"
+              label="Material Hora (R$)"
               name="materialTime"
               type="number"
               value={config.materialTime}
@@ -87,7 +87,7 @@ const Services = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Valor hora (R$)"
+              label="Valor Hora Clinica (R$)"
               name="valueTime"
               type="number"
               value={config.valueTime}
@@ -117,7 +117,7 @@ const Services = () => {
           </Grid>
         </Grid>
         <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleCreateService} sx={{ mt: 2 }}>
-          Criar Serviço
+          Criar Procedimento
         </Button>
         <TableContainer component={Paper} sx={{ mt: 2 }}>
           <Table>
@@ -130,8 +130,8 @@ const Services = () => {
                 <TableCell>Tipo de pagamento</TableCell>
                 <TableCell>Material Específico (R$)</TableCell>
                 <TableCell>Valor Dentista (R$)</TableCell>
-                <TableCell>Imposto (R$)</TableCell>
-                <TableCell>Encargo Cartão (R$)</TableCell>
+                <TableCell>Taxa de Imposto (R$)</TableCell>
+                <TableCell>Taxa do Cartão (R$)</TableCell>
                 <TableCell>Custo Capital (R$)</TableCell>
                 <TableCell>Custo Operacional (R$)</TableCell>
                 <TableCell>Margem Lucro (R$)</TableCell>

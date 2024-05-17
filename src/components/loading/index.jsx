@@ -15,7 +15,7 @@ const Loading = ({ showSpinner = true, message = "Loading..." }) => {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 9999
+        zIndex: 2
       }}
     >
       {showSpinner && <CircularProgress />}

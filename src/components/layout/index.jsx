@@ -12,7 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import spaceAction from '../../actions/space';
 import Loading from '../loading';
 
-function DashboardLayout({ children, user, loading=false }) {
+function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) {
   const [selectedSpace, setSelectedSpace] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [spaces, setSpaces] = useState([]);
@@ -22,10 +22,18 @@ function DashboardLayout({ children, user, loading=false }) {
     var response = await spaceAction.get();
     setSpaces(response)
     var localSpace = localStorage.getItem("space");
-    if (!localSpace) return;
+    if (!localSpace) {
+        if (response.lenght != 0){
+          var provisorySpace = response[0];
+          localStorage.setItem("space" , provisorySpace._id);
+          setSelectedSpace(provisorySpace._id);
+          updateSpace();
+        }
+        return;
+    };
     var findSpace = response.find(item => item._id == localSpace);
     if (findSpace){
-      setSelectedSpace(findSpace.name)
+      setSelectedSpace(findSpace._id)
     } else {
       localStorage.removeItem("space");
     }
@@ -41,15 +49,14 @@ function DashboardLayout({ children, user, loading=false }) {
 
   const handleSpaceChange = (event) => {
     setSelectedSpace(event.target.value);
-    var findSpace = spaces.find(item => item.name = event.target.value);
-    localStorage.setItem("space", findSpace._id);
-    setTimeout(() => {window.location.reload()},500)
+    localStorage.setItem("space", event.target.value);
+    updateSpace(event.target.value);
   };
 
   const defaultLinks = [
     [<HomeIcon />, 'Visão Geral', '/dashboard'],
     [<AddToPhotos />, 'Espaços', '/dashboard/spaces'],
-    [<LocalOffer />, 'Serviços', '/dashboard/services'],
+    [<LocalOffer />, 'Procedimentos', '/dashboard/services'],
   ];
 
   const settingsLinks = [
@@ -96,7 +103,7 @@ function DashboardLayout({ children, user, loading=false }) {
                     label="Espaço"
                   >
                     {spaces.map((space) => (
-                      <MenuItem key={space.name} value={space.name}>
+                      <MenuItem key={space._id} value={space._id}>
                         {space.name}
                       </MenuItem>
                     ))}
