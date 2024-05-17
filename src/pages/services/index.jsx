@@ -52,7 +52,7 @@ const Services = () => {
             </TableHead>
             <TableBody>
               {services.map((service) => (
-                <TableRow key={service._id} hover style={{ cursor: 'pointer' }}>
+                <TableRow key={service._id} hover style={{ cursor: 'pointer' }} onClick={() => handleRowClick(service._id)}>
                   <TableCell>{service.data.name}</TableCell>
                   <TableCell>{service.data.description}</TableCell>
                   <TableCell>{new Date(service.date).toLocaleDateString()}</TableCell>
