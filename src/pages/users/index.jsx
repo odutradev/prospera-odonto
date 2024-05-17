@@ -18,7 +18,7 @@ const Users = () => {
 
   const deleteUser = async (id) => {
     const send = async () => {
-      var response = await userAction.remove(id);
+      var response = await userAction.remove({id});
       if (response.error) throw error;
       return setTimeout(() => { getUsers() }, 500);
     }

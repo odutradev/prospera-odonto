@@ -19,7 +19,7 @@ const SignUp = () => {
     const data = new FormData(event.currentTarget);
     var form = {
       password: data.get('password'),
-      email: data.get('email'),
+      email: data.get('email').toLowerCase(),
       name: data.get('name')
     };
     var response = await userAction.signUp(form);

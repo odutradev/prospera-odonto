@@ -18,7 +18,7 @@ const SignIn = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     var form = {
-      email: data.get('email'),
+      email: data.get('email').toLowerCase(),
       password: data.get('password')
     };
     var response = await userAction.signIn(form);
