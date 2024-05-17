@@ -43,6 +43,7 @@ function DashboardLayout({ children, user, loading=false }) {
     setSelectedSpace(event.target.value);
     var findSpace = spaces.find(item => item.name = event.target.value);
     localStorage.setItem("space", findSpace._id);
+    setTimeout(() => {window.location.reload()},500)
   };
 
   const defaultLinks = [
