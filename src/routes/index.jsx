@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
+import CreateService from "../pages/createService";
 import CreateSpace from "../pages/createSpace";
 import Dashboard from "../pages/dashboard";
 import Services from "../pages/services";
@@ -26,6 +27,7 @@ import Space from "../pages/space";
           <Route path="/404" element={<Error />}/>
 
           <Route exact element={<PrivateRoute  />}>
+            <Route exact path="/dashboard/service/create" element={<CreateService/>}/>
             <Route exact path="/dashboard/space/create" element={<CreateSpace/>}/>
             <Route path="/dashboard/profile" element={<Profile />}/>
             <Route path="/dashboard/space/:id" element={<Space/>}/>

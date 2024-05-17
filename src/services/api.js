@@ -3,7 +3,7 @@ import axios from 'axios';
 var token = localStorage.getItem('token');
 
 const api = axios.create({
-  baseURL: "https://api.prosperaodonto.litetechnology.space/v1/",
+  baseURL: true ? "https://api.prosperaodonto.litetechnology.space/v1/" : "http://localhost:1000/v1/",
   headers: {
     'Content-Type': 'application/json',
     'authorization': token

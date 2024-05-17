@@ -2,7 +2,7 @@ import api from "../services/api";
 
 const get = async (data) => {
     try {
-        const response = await api.get('/service/get', { data });
+    const response = await api.post('/service/get', data);
         return response.data;
     } catch (error) {
         return { error: error?.response?.data?.msg };
