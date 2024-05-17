@@ -11,13 +11,20 @@ import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import spaceAction from '../../actions/space';
+import userAction from '../../actions/user';
 import Loading from '../loading';
 
-function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) {
+function DashboardLayout({ children, loading=false, updateSpace=()=>{} }) {
   const [selectedSpace, setSelectedSpace] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(true);
   const [spaces, setSpaces] = useState([]);
+  const [user, setUser] = useState([]);
   const location = useLocation();
+
+  const getUser = async () => {
+    var response = await userAction.me();
+    setUser(response);
+  };
 
   const getSpaces = async () => {
     var response = await spaceAction.get();
@@ -41,6 +48,7 @@ function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) 
   };
 
   useEffect(() => {
+    getUser();
     getSpaces();
   }, []);
 
@@ -79,7 +87,7 @@ function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, textAlign: 'center' }}>
             Prospera  <span style={{ fontWeight: 'bold' }}>Odonto</span>
           </Typography>
-          <Avatar>{user?.name || ""}</Avatar>
+          <Avatar>{user?.name?.slice(0,2) || ""}</Avatar>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -128,19 +136,21 @@ function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) 
               ))}
             </List>
           </div>
+                { user.role == 'admin' && 
           <div>
-            <Divider />
-            <List>
-              {adminLinks.map(([icon, text, route]) => (
-                <ListItem button key={text} component={Link} to={route} selected={location.pathname === route} sx={{ justifyContent: drawerOpen ? 'initial' : 'center', px: 2.5 }}>
-                  <ListItemIcon sx={{ minWidth: 0, mr: drawerOpen ? 3 : 'auto', justifyContent: 'center' }}>
-                    {icon}
-                  </ListItemIcon>
-                  {drawerOpen && <ListItemText primary={text} />}
-                </ListItem>
-              ))}
-            </List>
-          </div>
+          <Divider />
+          <List>
+            {adminLinks.map(([icon, text, route]) => (
+              <ListItem button key={text} component={Link} to={route} selected={location.pathname === route} sx={{ justifyContent: drawerOpen ? 'initial' : 'center', px: 2.5 }}>
+                <ListItemIcon sx={{ minWidth: 0, mr: drawerOpen ? 3 : 'auto', justifyContent: 'center' }}>
+                  {icon}
+                </ListItemIcon>
+                {drawerOpen && <ListItemText primary={text} />}
+              </ListItem>
+            ))}
+          </List>
+        </div>
+                }
           <div>
             <Divider />
             <List>
