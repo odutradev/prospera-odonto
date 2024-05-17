@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, AppBar, Drawer, List, ListItem, ListItemIcon, ListItemText, Divider, Typography, Toolbar, IconButton, Stack, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import AddToPhotos from '@mui/icons-material/AddToPhotos';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LocalOffer from '@mui/icons-material/LocalOffer';
@@ -64,6 +65,10 @@ function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) 
     [<LogoutIcon />, 'Sair', '/logout'],
   ];
 
+  const adminLinks = [
+    [<PersonSearchIcon />, 'Usuários', '/dashboard/admin/users']
+  ];
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, width: `calc(100% - ${drawerOpen ? 240 : 60}px)`, ml: `${drawerOpen ? 240 : 60}px`, transition: 'width 0.3s, margin-left 0.3s' }}>
@@ -114,6 +119,19 @@ function DashboardLayout({ children, user, loading=false, updateSpace=()=>{} }) 
             <Divider />
             <List>
               {defaultLinks.map(([icon, text, route]) => (
+                <ListItem button key={text} component={Link} to={route} selected={location.pathname === route} sx={{ justifyContent: drawerOpen ? 'initial' : 'center', px: 2.5 }}>
+                  <ListItemIcon sx={{ minWidth: 0, mr: drawerOpen ? 3 : 'auto', justifyContent: 'center' }}>
+                    {icon}
+                  </ListItemIcon>
+                  {drawerOpen && <ListItemText primary={text} />}
+                </ListItem>
+              ))}
+            </List>
+          </div>
+          <div>
+            <Divider />
+            <List>
+              {adminLinks.map(([icon, text, route]) => (
                 <ListItem button key={text} component={Link} to={route} selected={location.pathname === route} sx={{ justifyContent: drawerOpen ? 'initial' : 'center', px: 2.5 }}>
                   <ListItemIcon sx={{ minWidth: 0, mr: drawerOpen ? 3 : 'auto', justifyContent: 'center' }}>
                     {icon}

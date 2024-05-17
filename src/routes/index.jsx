@@ -5,13 +5,14 @@ import CreateSpace from "../pages/createSpace";
 import Dashboard from "../pages/dashboard";
 import Services from "../pages/services";
 import Profile from "../pages/profile";
+import Service from "../pages/service";
 import SignIn from "../pages/signin";
 import Spaces from "../pages/spaces";
 import SignUp from "../pages/signup";
 import Logout from "../pages/logout";
 import Error from "../pages/error";
 import Space from "../pages/space";
-import Service from "../pages/service";
+import Users from "../pages/users";
 
   export const Router = () => {
 
@@ -31,6 +32,7 @@ import Service from "../pages/service";
             <Route exact path="/dashboard/service/create" element={<CreateService/>}/>
             <Route exact path="/dashboard/space/create" element={<CreateSpace/>}/>
             <Route path="/dashboard/service/:id" element={<Service/>}/>
+            <Route path="/dashboard/admin/users" element={<Users />}/>
             <Route path="/dashboard/services" element={<Services />}/>
             <Route path="/dashboard/profile" element={<Profile />}/>
             <Route path="/dashboard/space/:id" element={<Space/>}/>
