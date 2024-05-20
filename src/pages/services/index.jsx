@@ -170,7 +170,7 @@ const Services = () => {
                     <TableCell>{formatCurrency(cardChange)}</TableCell>
                     <TableCell>{formatCurrency(annualCapital)}</TableCell>
                     <TableCell>{formatCurrency(operacionalValue)}</TableCell>
-                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 :  profitPercentage.toFixed(1)} % </TableCell>
+                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 :  profitPercentage.toFixed(1)}% </TableCell>
                   </TableRow>
                 )
               })}
