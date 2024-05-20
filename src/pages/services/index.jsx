@@ -134,7 +134,7 @@ const Services = () => {
                 <TableCell>Taxa do Cartão (R$)</TableCell>
                 <TableCell>Custo Capital (R$)</TableCell>
                 <TableCell>Custo Operacional (R$)</TableCell>
-                <TableCell>Margem Lucro (R$)</TableCell>
+                <TableCell>Margem Lucro (R$ - %)</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -153,8 +153,9 @@ const Services = () => {
                     dentistValue = service.data.dentistValue;
                   }
                 }
-                var total = tax + cardChange + annualCapital + dentistValue;
-                var operationalValue = value - total;
+                var operacionalValue = tax + cardChange + annualCapital + dentistValue;
+                var profit = value - operacionalValue;
+                var profitPercentage = (profit / value) * 100;
 
                 return (
                   <TableRow key={service._id} hover style={{ cursor: 'pointer' }} onClick={() => handleRowClick(service._id)}>
@@ -168,8 +169,8 @@ const Services = () => {
                     <TableCell>{formatCurrency(tax)}</TableCell>
                     <TableCell>{formatCurrency(cardChange)}</TableCell>
                     <TableCell>{formatCurrency(annualCapital)}</TableCell>
-                    <TableCell>{formatCurrency(total)}</TableCell>
-                    <TableCell>{formatCurrency(operationalValue)}</TableCell>
+                    <TableCell>{formatCurrency(operacionalValue)}</TableCell>
+                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 :  profitPercentage.toFixed(1)} % </TableCell>
                   </TableRow>
                 )
               })}
