@@ -9,6 +9,7 @@ const Services = () => {
   const [notSpace, setNotSpace] = useState(false);
   const [services, setServices] = useState([]);
   const [space, setSpace] = useState();
+  const [filter, setFilter] = useState(''); // State for search filter
   const [config, setConfig] = useState({
     tax: 0,
     cardChange: 0,
@@ -23,10 +24,10 @@ const Services = () => {
     var spaces = await spaceAction.get();
     if (!spaceID) return setNotSpace(true);
     var findSpace = spaces.find(item => item._id == spaceID);
-    setSpace(findSpace)
-    setConfig(findSpace.config)
+    setSpace(findSpace);
+    setConfig(findSpace.config);
     var response = await serviceAction.get({space: spaceID});
-    setServices(response)
+    setServices(response);
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ const Services = () => {
   const handleChange = async (e) => {
     const { name, value } = e.target;
     setConfig({ ...config, [name]: value });
-    var response = await spaceAction.update({id: space._id, data: { config: { ...config, [name]: value }}});
+    await spaceAction.update({ id: space._id, data: { config: { ...config, [name]: value } } });
   };
 
   const handleRowClick = (id) => {
@@ -51,8 +52,12 @@ const Services = () => {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number);
   };
 
+  const filteredServices = services.filter(service =>
+    service.data.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
-    <Layout updateSpace={getServices}  loading={notSpace ? "Crie uma tabela antes de criar procedimentos..." : false}>
+    <Layout updateSpace={getServices} loading={notSpace ? "Crie uma tabela antes de criar procedimentos..." : false}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={6}>
@@ -119,6 +124,13 @@ const Services = () => {
         <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleCreateService} sx={{ mt: 2 }}>
           Criar Procedimento
         </Button>
+        <TextField
+          variant="outlined"
+          label="Pesquisar"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          sx={{ mt: 2, mb: 2, width: '100%' }}
+        />
         <TableContainer component={Paper} sx={{ mt: 2 }}>
           <Table>
             <TableHead>
@@ -139,12 +151,11 @@ const Services = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {services.map((service) => {
-
+              {filteredServices.map((service) => {
                 var value = service.data.value;
-                var tax = service.data.paymentType != "dinheiro" ? value * (config.tax / 100) : 0;
-                var cardChange = service.data.paymentType == "cartao" ?  value * (config.cardChange / 100) : 0;
-                var annualCapital = service.data.paymentType == "cartao" ?  value * (config.annualCapital / 100) : 0;
+                var tax = service.data.paymentType !== "dinheiro" ? value * (config.tax / 100) : 0;
+                var cardChange = service.data.paymentType === "cartao" ? value * (config.cardChange / 100) : 0;
+                var annualCapital = service.data.paymentType === "cartao" ? value * (config.annualCapital / 100) : 0;
 
                 var materialTime = config.materialTime * service.data.procedureTime;
                 var valueTime = config.valueTime * service.data.procedureTime;
@@ -175,7 +186,7 @@ const Services = () => {
                     <TableCell>{formatCurrency(cardChange)}</TableCell>
                     <TableCell>{formatCurrency(annualCapital)}</TableCell>
                     <TableCell>{formatCurrency(operacionalValue)}</TableCell>
-                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 :  profitPercentage.toFixed(1)}% </TableCell>
+                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 : profitPercentage.toFixed(1)}% </TableCell>
                   </TableRow>
                 )
               })}
