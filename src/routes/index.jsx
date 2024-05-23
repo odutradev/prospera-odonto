@@ -14,6 +14,7 @@ import Logout from "../pages/logout";
 import Error from "../pages/error";
 import Space from "../pages/space";
 import Users from "../pages/users";
+import User from "../pages/user";
 
   export const Router = () => {
 
@@ -31,8 +32,9 @@ import Users from "../pages/users";
           <Route path="/404" element={<Error />}/>
 
           <Route exact element={<PrivateRoute  />}>
-            <Route exact path="/dashboard/service/create" element={<CreateService/>}/>
-            <Route exact path="/dashboard/space/create" element={<CreateSpace/>}/>
+            <Route path="/dashboard/service/create" element={<CreateService/>}/>
+            <Route path="/dashboard/admin/user/:id" element={<User/>}/>
+            <Route path="/dashboard/space/create" element={<CreateSpace/>}/>
             <Route path="/dashboard/service/:id" element={<Service/>}/>
             <Route path="/dashboard/admin/users" element={<Users />}/>
             <Route path="/dashboard/services" element={<Services />}/>

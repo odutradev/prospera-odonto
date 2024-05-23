@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import { Box, TextField, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BlockIcon from '@mui/icons-material/Block';
 
@@ -57,6 +58,10 @@ const Users = () => {
     })
   };
 
+  const handleViewClick = (id) => {
+    window.location.href = "/dashboard/admin/user/" + id;
+  };
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -107,6 +112,9 @@ const Users = () => {
                     </IconButton>
                     <IconButton onClick={() => unlockUser(user._id)}>
                       <CheckCircleOutlineIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleViewClick(user._id)}>
+                      <VisibilityIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>
