@@ -129,6 +129,7 @@ const Services = () => {
                 <TableCell>Tempo do procedimento (h)</TableCell>
                 <TableCell>Tipo de pagamento</TableCell>
                 <TableCell>Material Específico (R$)</TableCell>
+                <TableCell>Valor hora material/clinica (R$)</TableCell>
                 <TableCell>Valor Dentista (R$)</TableCell>
                 <TableCell>Taxa de Imposto (R$)</TableCell>
                 <TableCell>Taxa do Cartão (R$)</TableCell>
@@ -145,6 +146,9 @@ const Services = () => {
                 var cardChange = service.data.paymentType == "cartao" ?  value * (config.cardChange / 100) : 0;
                 var annualCapital = service.data.paymentType == "cartao" ?  value * (config.annualCapital / 100) : 0;
 
+                var materialTime = config.materialTime * service.data.procedureTime;
+                var valueTime = config.valueTime * service.data.procedureTime;
+
                 var dentistValue = 0;
                 if (service.data.anotherDentist){
                   if (service.data.dentistPaidInPercentage){
@@ -153,7 +157,7 @@ const Services = () => {
                     dentistValue = service.data.dentistValue;
                   }
                 }
-                var operacionalValue = tax + cardChange + annualCapital + dentistValue;
+                var operacionalValue = tax + cardChange + annualCapital + dentistValue + materialTime + valueTime;
                 var profit = value - operacionalValue;
                 var profitPercentage = (profit / value) * 100;
 
@@ -165,6 +169,7 @@ const Services = () => {
                     <TableCell>{service.data.procedureTime}</TableCell>
                     <TableCell>{service.data.paymentType}</TableCell>
                     <TableCell>{formatCurrency(service.data.materialPrice)}</TableCell>
+                    <TableCell>{formatCurrency(materialTime)} - {formatCurrency(valueTime)}</TableCell>
                     <TableCell>{formatCurrency(dentistValue)}</TableCell>
                     <TableCell>{formatCurrency(tax)}</TableCell>
                     <TableCell>{formatCurrency(cardChange)}</TableCell>
