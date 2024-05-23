@@ -31,9 +31,9 @@ const CreateService = () => {
       return setTimeout(() => { window.location.href = "/dashboard/services" }, 500);
     }
     toast.promise(send(), {
-      pending: `Criando serviço`,
-      success: `Serviço criado com sucesso`,
-      error: `Erro ao criar serviço`
+      pending: `Criando procedimento`,
+      success: `Procedimento criado com sucesso`,
+      error: `Erro ao criar procedimento`
     });
   };
 
@@ -65,7 +65,7 @@ const CreateService = () => {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Criar Novo Serviço
+          Criar Novo Procedimento
         </Typography>
         
         <TextField
@@ -186,7 +186,7 @@ const CreateService = () => {
             )
           }
         <Button variant="contained" color="primary" onClick={handleCreate} sx={{ mt: 2 }}>
-          Criar Serviço
+          Criar Procedimento
         </Button>
       </Box>
     </Layout>

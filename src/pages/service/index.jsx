@@ -52,9 +52,9 @@ const Service = () => {
       return setTimeout(() => { window.location.href = "/dashboard/services" }, 500);
     }
     toast.promise(send(), {
-      pending: `Atualizando serviço`,
-      success: `Serviço atualizado com sucesso`,
-      error: `Erro ao atualizar serviço`
+      pending: `Atualizando procedimento`,
+      success: `Procedimento atualizado com sucesso`,
+      error: `Erro ao atualizar procedimento`
     });
   };
 
@@ -65,9 +65,9 @@ const Service = () => {
         return setTimeout(() => { window.location.href = "/dashboard/services" }, 500);
       }
       toast.promise(send(), {
-        pending: `Apagando serviço`,
-        success: `Serviço apagado com sucesso`,
-        error: `Erro ao apagar serviço`
+        pending: `Apagando procedimento`,
+        success: `Procedimento apagado com sucesso`,
+        error: `Erro ao apagar procedimento`
       })
   };
 
@@ -90,7 +90,7 @@ const Service = () => {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Meu Serviço
+          Meu procedimento
         </Typography>
 
                 
