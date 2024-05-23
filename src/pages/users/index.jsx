@@ -38,7 +38,7 @@ const Users = () => {
       return setTimeout(() => { getUsers() }, 500);
     }
     toast.promise(send(), {
-      pending: `Desb usuario`,
+      pending: `Bloqueando usuario`,
       success: `Usuario bloqueado com sucesso`,
       error: `Erro ao bloquear usuario`
     })

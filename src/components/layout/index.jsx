@@ -23,6 +23,9 @@ function DashboardLayout({ children, loading=false, updateSpace=()=>{} }) {
 
   const getUser = async () => {
     var response = await userAction.me();
+    if (response.role == "block") {
+     window.location.href = "/block-account";
+    }
     setUser(response);
   };
 
