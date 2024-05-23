@@ -37,6 +37,14 @@ const get = async () => {
         return { error: error?.response?.data?.msg };
     }
 }
+const getSpacesAndServices = async (author) => {
+    try {
+        const response = await api.post('/space/get-spaces-and-services', { author });
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
 
 const update = async (data) => {
     try {
@@ -57,5 +65,5 @@ const remove = async (data) => {
 }
 
 export default {
-    signIn, signUp, me, update, get, remove
+    signIn, signUp, me, update, get, remove, getSpacesAndServices
 }
