@@ -14,9 +14,9 @@ const CreateSpace = () => {
         return setTimeout(() => { window.location.href = "/dashboard/spaces" }, 500);
       }
       toast.promise(send(), {
-        pending: `Criando espaço`,
-        success: `Espaço criado com sucesso`,
-        error: `Erro ao criar espaço`
+        pending: `Criando tabela`,
+        success: `Tabela criado com sucesso`,
+        error: `Erro ao criar tabela`
       })
   };
 
@@ -43,7 +43,7 @@ const CreateSpace = () => {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Criar Novo Espaço
+          Criar Nova Tabela
         </Typography>
         
         <TextField
@@ -65,7 +65,7 @@ const CreateSpace = () => {
           rows={4}
         />
         <Button variant="contained" color="primary" onClick={handleCreate} sx={{ mt: 2 }}>
-          Criar Espaço
+          Criar Tabela
         </Button>
       </Box>
     </Layout>

@@ -32,9 +32,9 @@ const Space = () => {
         return setTimeout(() => { window.location.href = "/dashboard/spaces" }, 500);
       }
       toast.promise(send(), {
-        pending: `Atualizando espaço`,
-        success: `Espaço atualizado com sucesso`,
-        error: `Erro ao atualizar espaço`
+        pending: `Atualizando tabela`,
+        success: `Tabela atualizado com sucesso`,
+        error: `Erro ao atualizar tabela`
       })
   };
 
@@ -45,9 +45,9 @@ const Space = () => {
         return setTimeout(() => { window.location.href = "/dashboard/spaces" }, 500);
       }
       toast.promise(send(), {
-        pending: `Apagando espaço`,
-        success: `Espaço apagado com sucesso`,
-        error: `Erro ao apagar espaço`
+        pending: `Apagando Tabela`,
+        success: `Tabela apagado com sucesso`,
+        error: `Erro ao apagar Tabela`
       })
   };
 
@@ -65,7 +65,7 @@ const Space = () => {
         }}
       >
         <Typography variant="h4" gutterBottom>
-          Meu Espaço
+          Minha Tabela
         </Typography>
         
         <Card sx={{ width: '100%', mb: 2 }}>

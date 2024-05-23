@@ -52,7 +52,7 @@ const Services = () => {
   };
 
   return (
-    <Layout updateSpace={getServices}  loading={notSpace ? "Crie um espaço antes de criar procedimentos..." : false}>
+    <Layout updateSpace={getServices}  loading={notSpace ? "Crie uma tabela antes de criar procedimentos..." : false}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} sm={6}>

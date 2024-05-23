@@ -64,7 +64,7 @@ function DashboardLayout({ children, loading=false, updateSpace=()=>{} }) {
 
   const defaultLinks = [
     [<HomeIcon />, 'Visão Geral', '/dashboard'],
-    [<AddToPhotos />, 'Espaços', '/dashboard/spaces'],
+    [<AddToPhotos />, 'Tabelas', '/dashboard/spaces'],
     [<LocalOffer />, 'Procedimentos', '/dashboard/services'],
   ];
 
@@ -108,12 +108,12 @@ function DashboardLayout({ children, loading=false, updateSpace=()=>{} }) {
             <div style={{ padding: '16px' }}>
               {drawerOpen && (
                 <FormControl fullWidth sx={{ mt: 2 }}>
-                  <InputLabel id="space-select-label">Espaço</InputLabel>
+                  <InputLabel id="space-select-label">Tabela</InputLabel>
                   <Select
                     labelId="space-select-label"
                     value={selectedSpace}
                     onChange={handleSpaceChange}
-                    label="Espaço"
+                    label="Tabela"
                   >
                     {spaces.map((space) => (
                       <MenuItem key={space._id} value={space._id}>

@@ -30,7 +30,7 @@ const Spaces = () => {
     <Layout>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
         <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleCreateSpace} sx={{ mb: 2 }}>
-          Criar Espaço
+          Criar Tabela
         </Button>
         <TableContainer component={Paper}>
           <Table>
