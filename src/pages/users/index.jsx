@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
 import { Box, TextField, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import BlockIcon from '@mui/icons-material/Block';
 
 import Layout from '../../components/layout';
 import userAction from '../../actions/user'; 
@@ -26,6 +28,32 @@ const Users = () => {
       pending: `Apagando usuario`,
       success: `Usuario apagado com sucesso`,
       error: `Erro ao apagar usuario`
+    })
+  };
+
+  const blockUser = async (id, user) => {
+    const send = async () => {
+      var response = await userAction.update({id, data: {...user, role: "block"}});
+      if (response.error) throw error;
+      return setTimeout(() => { getUsers() }, 500);
+    }
+    toast.promise(send(), {
+      pending: `Desb usuario`,
+      success: `Usuario bloqueado com sucesso`,
+      error: `Erro ao bloquear usuario`
+    })
+  };
+
+  const unlockUser = async (id, user) => {
+    const send = async () => {
+      var response = await userAction.update({id, data: {...user, role: "normal"}});
+      if (response.error) throw error;
+      return setTimeout(() => { getUsers() }, 500);
+    }
+    toast.promise(send(), {
+      pending: `Desbloqueando usuario`,
+      success: `Usuario desbloqueado com sucesso`,
+      error: `Erro ao desbloquear usuario`
     })
   };
 
@@ -56,6 +84,7 @@ const Users = () => {
                 <TableCell>Email</TableCell>
                 <TableCell>Contato</TableCell>
                 <TableCell>Descrição</TableCell>
+                <TableCell>Status</TableCell>
                 <TableCell>Data de Criação</TableCell>
                 <TableCell>Ações</TableCell>
               </TableRow>
@@ -67,10 +96,17 @@ const Users = () => {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.contact}</TableCell>
                   <TableCell>{user.description}</TableCell>
+                  <TableCell>{user.role == "block" ? "bloqueado" : "acesso liberado"}</TableCell>
                   <TableCell>{new Date(user.date).toLocaleDateString()}</TableCell>
                   <TableCell>
                     <IconButton onClick={() => deleteUser(user._id)}>
                       <DeleteIcon />
+                    </IconButton>
+                    <IconButton onClick={() => blockUser(user._id, user)}>
+                      <BlockIcon />
+                    </IconButton>
+                    <IconButton onClick={() => unlockUser(user._id)}>
+                      <CheckCircleOutlineIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>

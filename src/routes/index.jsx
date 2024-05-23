@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
 import CreateService from "../pages/createService";
+import BlockAccount from "../pages/blockAccount";
 import CreateSpace from "../pages/createSpace";
 import Dashboard from "../pages/dashboard";
 import Services from "../pages/services";
@@ -23,6 +24,7 @@ import Users from "../pages/users";
         <Routes>
           <Route path="/" element={<Navigate to="/signin" replace/>}/>
           <Route path="*" element={<Navigate to="/404" replace/>}/>
+          <Route path="/block-account" element={<BlockAccount />}/>
           <Route path="/signin" element={<SignIn />}/>
           <Route path="/signup" element={<SignUp />}/>
           <Route path="/logout" element={<Logout />}/>
