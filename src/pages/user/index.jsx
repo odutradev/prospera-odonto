@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, Card, Grid, CardContent} from '@mui/material';
 
 import Layout from '../../components/layout';
 import userAction from '../../actions/user';
@@ -9,7 +9,13 @@ import userAction from '../../actions/user';
 const User = () => {
   const [selectedSpace, setSelectedSpace] = useState('');
   const [data, setData] = useState([]);
+  const [user, setUser] = useState();
   const { id } = useParams();
+
+  const getUser = async () => {
+    var response = await userAction.me();
+    setUser(response);
+  };
 
   const getData = async () => {
     if (!id) return;
@@ -18,10 +24,12 @@ const User = () => {
   };
 
   useEffect(() => {
+    getUser()
     getData();
   }, [id]);
 
   const handleChange = (event) => {
+    console.log(selectedServices)
     setSelectedSpace(event.target.value);
   };
 
@@ -37,6 +45,11 @@ const User = () => {
         <Button variant="contained" color="secondary" onClick={handleBackClick} sx={{ mb: 2 }}>
           Voltar
         </Button>
+        <Typography variant="h3" gutterBottom>
+          {user?.name || "nome"} - {user?.email || "email"}
+        </Typography>
+        
+
         <FormControl fullWidth sx={{ mb: 2 }}>
           <InputLabel id="select-space-label">Selecione uma tabela</InputLabel>
           <Select
@@ -52,8 +65,40 @@ const User = () => {
             ))}
           </Select>
         </FormControl>
-        
         {selectedSpace && (
+                  <Card sx={{ width: '100%', mb: 2 }}>
+                  <CardContent>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Taxa de Imposto (%):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config.tax || 0}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Taxa do Cartão (%):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config?.cardChange || 0}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Material Hora (R$):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config?.materialTime || 0}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Valor Hora Clinica (R$):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config?.valueTime || 0}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Porcentagem do Dentista (%):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config?.dentistValue || 0}</Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" color="textSecondary">Custo Capital Anual (%):</Typography>
+                        <Typography variant="body1">{data.find(space => space.spaceID === selectedSpace)?.config?.annualCapital || 0}</Typography>
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+        )}
+        {selectedSpace && (
+          
           <Box sx={{ width: '100%' }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               Procedimentos na tabela: {data.find(space => space.spaceID === selectedSpace)?.name}
