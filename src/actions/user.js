@@ -54,6 +54,14 @@ const update = async (data) => {
         return { error: error?.response?.data?.msg };
     }
 }
+const updatePassword = async (data) => {
+    try {
+        const response = await api.put('/user/update-password', data);
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
 
 const remove = async (data) => {
     try {
@@ -65,5 +73,5 @@ const remove = async (data) => {
 }
 
 export default {
-    signIn, signUp, me, update, get, remove, getSpacesAndServices
+    signIn, signUp, me, update, get, remove, getSpacesAndServices, updatePassword
 }

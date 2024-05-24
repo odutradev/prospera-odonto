@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import { Box, Button, TextField, Typography } from '@mui/material';
+
 import userAction from '../../actions/user';
 
 const ResetPassword = () => {
@@ -23,7 +26,16 @@ const ResetPassword = () => {
   };
 
   const handleResetPassword = () => {
-    
+    const send = async () => {
+      var response = await userAction.updatePassword({id, password: newPassword});
+      if (response.error) throw error;
+     return setTimeout(() => { window.location.href = "/signin" }, 1500);
+    }
+    toast.promise(send(), {
+      pending: `Atualizando senha`,
+      success: `Senha atualizada com sucesso`,
+      error: `Erro ao atualizar senha`
+    })
   };
 
 
