@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { Box, TextField, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, IconButton } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import PasswordIcon from '@mui/icons-material/Password';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BlockIcon from '@mui/icons-material/Block';
 
@@ -32,9 +33,9 @@ const Users = () => {
     })
   };
 
-  const blockUser = async (id, user) => {
+  const blockUser = async (id) => {
     const send = async () => {
-      var response = await userAction.update({id, data: {...user, role: "block"}});
+      var response = await userAction.update({id, data: { role: "block" }});
       if (response.error) throw error;
       return setTimeout(() => { getUsers() }, 500);
     }
@@ -45,9 +46,9 @@ const Users = () => {
     })
   };
 
-  const unlockUser = async (id, user) => {
+  const unlockUser = async (id) => {
     const send = async () => {
-      var response = await userAction.update({id, data: {...user, role: "normal"}});
+      var response = await userAction.update({id, data: { role: "normal" }});
       if (response.error) throw error;
       return setTimeout(() => { getUsers() }, 500);
     }
@@ -57,6 +58,23 @@ const Users = () => {
       error: `Erro ao desbloquear usuario`
     })
   };
+  const resetPassword = async (id) => {
+    const url = `${window.location.origin}/reset-password/${id}`;
+      const send = async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+        } catch(e){
+            throw error;
+        }
+        return;
+      }
+      toast.promise(send(), {
+        pending: `Copiando URL para areá de transferencia`,
+        success: `URL copiada com sucesso`,
+        error: `Erro ao copiar URL`
+      })
+  };
+  
 
   const handleViewClick = (id) => {
     window.location.href = "/dashboard/admin/user/" + id;
@@ -107,11 +125,14 @@ const Users = () => {
                     <IconButton onClick={() => deleteUser(user._id)}>
                       <DeleteIcon />
                     </IconButton>
-                    <IconButton onClick={() => blockUser(user._id, user)}>
+                    <IconButton onClick={() => blockUser(user._id)}>
                       <BlockIcon />
                     </IconButton>
                     <IconButton onClick={() => unlockUser(user._id)}>
                       <CheckCircleOutlineIcon />
+                    </IconButton>
+                    <IconButton onClick={() => resetPassword(user._id)}>
+                      <PasswordIcon />
                     </IconButton>
                     <IconButton onClick={() => handleViewClick(user._id)}>
                       <VisibilityIcon />

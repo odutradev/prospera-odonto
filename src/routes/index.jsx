@@ -15,6 +15,7 @@ import Error from "../pages/error";
 import Space from "../pages/space";
 import Users from "../pages/users";
 import User from "../pages/user";
+import ResetPassword from "../pages/resetPassword";
 
   export const Router = () => {
 
@@ -23,6 +24,7 @@ import User from "../pages/user";
     return(
       <BrowserRouter>
         <Routes>
+          <Route path="/reset-password/:id" element={<ResetPassword />}/>
           <Route path="/" element={<Navigate to="/signin" replace/>}/>
           <Route path="*" element={<Navigate to="/404" replace/>}/>
           <Route path="/block-account" element={<BlockAccount />}/>
