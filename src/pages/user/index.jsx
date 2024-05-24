@@ -8,13 +8,14 @@ import userAction from '../../actions/user';
 
 const User = () => {
   const [selectedSpace, setSelectedSpace] = useState('');
+  const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
-  const [user, setUser] = useState();
   const { id } = useParams();
 
   const getUser = async () => {
-    var response = await userAction.me();
-    setUser(response);
+    var response = await userAction.get();
+    const findUser = response.find(x => x._id == id);
+    setUser(findUser)
   };
 
   const getData = async () => {
