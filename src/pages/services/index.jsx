@@ -141,7 +141,8 @@ const Services = () => {
                 <TableCell>Tempo do procedimento (h)</TableCell>
                 <TableCell>Tipo de pagamento</TableCell>
                 <TableCell>Material Específico (R$)</TableCell>
-                <TableCell>Valor hora material/clinica (R$)</TableCell>
+                <TableCell>Valor hora material (R$)</TableCell>
+                <TableCell>Valor hora clinica (R$)</TableCell>
                 <TableCell>Valor Dentista (R$)</TableCell>
                 <TableCell>Taxa de Imposto (R$)</TableCell>
                 <TableCell>Taxa do Cartão (R$)</TableCell>
@@ -161,14 +162,16 @@ const Services = () => {
                 var valueTime = config.valueTime * service.data.procedureTime;
 
                 var dentistValue = 0;
+                var dentistDiscount = (cardChange + service.data.materialPrice)
+
                 if (service.data.anotherDentist){
                   if (service.data.dentistPaidInPercentage){
-                    dentistValue = (value - tax) * (config.dentistValue / 100)
+                    dentistValue = (value - dentistDiscount) * (config.dentistValue / 100)
                   } else {
-                    dentistValue = service.data.dentistValue;
+                    dentistValue = (service.data.dentistValue - dentistDiscount);
                   }
                 }
-                var operacionalValue = tax + cardChange + annualCapital + dentistValue + materialTime + valueTime;
+                var operacionalValue = tax + (service.data.anotherDentist ? cardChange : 0) + annualCapital + dentistValue + materialTime + valueTime;
                 var profit = value - operacionalValue;
                 var profitPercentage = (profit / value) * 100;
 
@@ -180,13 +183,14 @@ const Services = () => {
                     <TableCell>{service.data.procedureTime}</TableCell>
                     <TableCell>{service.data.paymentType}</TableCell>
                     <TableCell>{formatCurrency(service.data.materialPrice)}</TableCell>
-                    <TableCell>{formatCurrency(materialTime)} - {formatCurrency(valueTime)}</TableCell>
+                    <TableCell>{formatCurrency(materialTime)}</TableCell>
+                    <TableCell>{formatCurrency(valueTime)}</TableCell>
                     <TableCell>{formatCurrency(dentistValue)}</TableCell>
                     <TableCell>{formatCurrency(tax)}</TableCell>
                     <TableCell>{formatCurrency(cardChange)}</TableCell>
                     <TableCell>{formatCurrency(annualCapital)}</TableCell>
                     <TableCell>{formatCurrency(operacionalValue)}</TableCell>
-                    <TableCell>{formatCurrency(profit)} - {isNaN(profitPercentage) ? 0 : profitPercentage.toFixed(1)}% </TableCell>
+                    <TableCell>{formatCurrency(profit)} / {isNaN(profitPercentage) ? 0 : profitPercentage.toFixed(1)}% </TableCell>
                   </TableRow>
                 )
               })}
