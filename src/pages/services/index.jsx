@@ -171,7 +171,7 @@ const Services = () => {
                     dentistValue = (service.data.dentistValue - dentistDiscount);
                   }
                 }
-                var operacionalValue = tax + (service.data.anotherDentist ? cardChange : 0) + annualCapital + dentistValue + materialTime + valueTime;
+                var operacionalValue = tax + dentistDiscount + annualCapital + dentistValue + materialTime + valueTime;
                 var profit = value - operacionalValue;
                 var profitPercentage = (profit / value) * 100;
 
