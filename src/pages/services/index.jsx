@@ -168,7 +168,7 @@ const Services = () => {
                   if (service.data.dentistPaidInPercentage){
                     dentistValue = (value - dentistDiscount) * (config.dentistValue / 100)
                   } else {
-                    dentistValue = (service.data.dentistValue - dentistDiscount);
+                    dentistValue = (service.data.dentistValue);
                   }
                 }
                 var operacionalValue = tax + dentistDiscount + annualCapital + dentistValue + materialTime + valueTime;
