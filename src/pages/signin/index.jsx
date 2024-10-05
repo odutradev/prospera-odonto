@@ -82,10 +82,14 @@ const SignIn = () => {
               ENTRAR
             </Button>
             <Grid container>
-              <Grid item xs></Grid>
-              <Grid item>
+              <Grid item xs>
                 <Link href="/signup" variant="body2">
                   {"Não tem uma conta? Cadastre"}
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/request-reset-password" variant="body2">
+                  {"Esqueceu sua senha?"}
                 </Link>
               </Grid>
             </Grid>
