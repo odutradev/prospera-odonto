@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, Outlet} from "react-router-dom";
 
+import RequestResetPassword from "../pages/requestResetPassword";
+import ResetPassword from "../pages/resetPassword";
 import CreateService from "../pages/createService";
 import BlockAccount from "../pages/blockAccount";
 import CreateSpace from "../pages/createSpace";
@@ -15,7 +17,6 @@ import Error from "../pages/error";
 import Space from "../pages/space";
 import Users from "../pages/users";
 import User from "../pages/user";
-import ResetPassword from "../pages/resetPassword";
 
   export const Router = () => {
 
@@ -24,6 +25,7 @@ import ResetPassword from "../pages/resetPassword";
     return(
       <BrowserRouter>
         <Routes>
+          <Route path="/request-reset-password" element={<RequestResetPassword />}/>
           <Route path="/reset-password/:id" element={<ResetPassword />}/>
           <Route path="/" element={<Navigate to="/signin" replace/>}/>
           <Route path="*" element={<Navigate to="/404" replace/>}/>
