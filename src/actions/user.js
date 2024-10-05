@@ -62,7 +62,14 @@ const updatePassword = async (data) => {
         return { error: error?.response?.data?.msg };
     }
 }
-
+const requestResetPassword = async (data) => {
+    try {
+        const response = await api.post('/user/request-reset-password', data);
+        return response.data;
+    } catch (error) {
+        return { error: error?.response?.data?.msg };
+    }
+}
 const remove = async (data) => {
     try {
         const response = await api.delete('/user/delete', { data });
@@ -73,5 +80,5 @@ const remove = async (data) => {
 }
 
 export default {
-    signIn, signUp, me, update, get, remove, getSpacesAndServices, updatePassword
+    signIn, signUp, me, update, get, remove, getSpacesAndServices, updatePassword, requestResetPassword
 }
