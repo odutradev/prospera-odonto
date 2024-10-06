@@ -47,7 +47,7 @@ const RequestResetPassword = () => {
             Solicitar troca de senha!
           </Typography>
           <Typography variant="body2">
-            Ao enviar uma solicitação, os responsaveis pela plataforma irão analisar a solicitação, e caso autorizado entrarão em contato com você!
+            Enviaremos para seu email um link para redefinição de senha!
           </Typography>
         </Box>
           <Box component="form" onSubmit={handleSubmit}  sx={{ mt: 1 }}>
